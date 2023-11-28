@@ -1,0 +1,30 @@
+import string
+
+def caesar_encrypt(message, key):
+    encrypted_message = ""
+    for char in message:
+        if char.isalpha():  # Check if the character is alphabetic
+            if char.islower():
+                shift = ord('a')
+            else:
+                shift = ord('A')
+            encrypted_char = chr(((ord(char) - shift + key) % 26) + shift)
+            encrypted_message += encrypted_char
+        else:
+            encrypted_message += char  # Keep spaces and special characters unchanged
+
+    return encrypted_message
+
+def caesar_decrypt(encrypted_message, key):
+    return caesar_encrypt(encrypted_message, -key)  # Decrypting is the same as encrypting with the opposite key
+
+message = input("Enter a message: ")
+
+# Use a fixed key value, e.g., 3
+key = 3
+
+encrypted_message = caesar_encrypt(message, key)
+print(f'Encrypted message: {encrypted_message}')
+
+decrypted_message = caesar_decrypt(encrypted_message, key)
+print(f'Decrypted message: {decrypted_message}')
